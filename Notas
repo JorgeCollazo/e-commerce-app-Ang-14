@@ -1,0 +1,22 @@
+1- Install Prettier and create a config file (Ctrl+Shift+P)
+2- Create an package.json (npm init) 
+3- You can add specific config files to prettier
+4- Configure MongoDB: 
+    4.1- Create a project (Cluster will be already created)
+    4.2- Create a Collection and a Database
+5- Backend
+    5.1- Create the package.json file (npm init)
+    5.2- Create the app.js file
+    5.3- Install nodemon package and add: "start":"nodemon app.js" to the script section in package.json file   
+    5.4- Install express (A nodejs library to create a server)
+    5.5- Install the npm package dotenv. It is a zero-dependency module that loads environment variables from a .env
+         file into process.env
+    5.6- Install npm package morgan (To print incoming requests to the console)
+    5.7- Install mongoose
+    5.8- Get the connection string from MongoDB
+        5.8.1- Click on button 'Connect'
+        5.8.2- Click on button 'Connecting with MongoDB for VS Code' (You can use this VS Code plugin or MongoDB Compass or MongoDB Atlas or Datagrip)
+    5.9- Added .json data to collections (Used DataGrip)
+    5.10- Created a mongoose model for products
+    5.11- Structure the project file folder (Create model, routers folders, etc)
+    5.12- Install CORS npm package  (npm i cors)
