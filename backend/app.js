@@ -4,6 +4,8 @@ const morgan = require('morgan') ;   // morgan package
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');            // dotenv package
+const authJwt = require('./helpers/jwt')
+const errorHandler = require('./helpers/error-handlers')
 
 app.use(cors());        // Before anything else
 app.options('*', cors());   // Allowing every http request from another origin when using this cors, this can also be done manually like in the Post projects
@@ -11,18 +13,21 @@ app.options('*', cors());   // Allowing every http request from another origin w
 // const Product = require('./models/product');           // Moved to the routes/products
 
 
-/* Middlewares */
+/* Middlewares (They check everything going to the server) */
 
-app.use(express.json());            // Middleware which is more recent (Express 4.16.0 and later) than app.use(bodyParser.json()); const bodyParser = require("body-parser");
-app.use(morgan('tiny'));    // The morgan middleware is a popular logging middleware for Node.js that helps in logging HTTP requests.
-                                   // The morgan middleware is configured with the 'tiny' format, which is a predefined log format that provides concise but useful information about incoming requests.
+app.use(express.json());              // Middleware which is more recent (Express 4.16.0 and later) than app.use(bodyParser.json()); const bodyParser = require("body-parser");
+app.use(morgan('tiny'));       // The morgan middleware is a popular logging middleware for Node.js that helps in logging HTTP requests. The morgan middleware is configured with the 'tiny' format, which is a predefined log format that provides concise but useful information about incoming requests.
+app.use(authJwt());                   // Using the express-jwt library to forbid no token authorization requests
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));    // In order to get access to the images turning into a static folder
+app.use(errorHandler);              // This middleware will be executed whenever an error arises, Error Handling.
 
-/* Routes */
+
+/* Routes */ 
 
 const productsRoute = require('./routes/products');    // Added after moving the routes to routes/products
-const categoriesRoute = require('./routes/categories');    // Added after moving the routes to routes/products
-const ordersRoute = require('./routes/orders');    // Added after moving the routes to routes/products
-const usersRoute = require('./routes/products');    // Added after moving the routes to routes/products
+const categoriesRoute = require('./routes/categories');    // Added after moving the routes to routes/categories
+const ordersRoute = require('./routes/orders');    // Added after moving the routes to routes/orders
+const usersRoute = require('./routes/users');    // Added after moving the routes to routes/users
 
 const api = process.env.API_URL;     // You can now call your .env variables
 

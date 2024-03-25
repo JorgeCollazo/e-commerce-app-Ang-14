@@ -53,6 +53,7 @@ router.put('/:id', async (req, res) => {
         return res.status(404).send('No category found!!!')
     res.send(category);
 })
+
 router.delete('/:id', (req, res) => {
     Category.findByIdAndDelete(req.params.id).then((category) =>{
         if(category){

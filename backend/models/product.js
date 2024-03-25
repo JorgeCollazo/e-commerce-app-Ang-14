@@ -53,7 +53,7 @@ const productSchema = mongoose.Schema({     // schemas in lowercase
     }
 })
 
-productSchema.virtual('id').get(function () {   // You cannot use an arrow function here because they do not have their own this context, they inherit it from the surrounding scope. In Mongoose virtuals, the this context is crucial, as it refers to the document.
+productSchema.virtual('id').get(function () {   // You cannot use an arrow function here because they do not have their own 'this' context, they inherit it from the surrounding scope. In Mongoose virtuals, the this context is crucial, as it refers to the document.
     return this._id.toHexString();
 })
 

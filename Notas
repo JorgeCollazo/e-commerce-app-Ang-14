@@ -20,3 +20,43 @@
     5.10- Created a mongoose model for products
     5.11- Structure the project file folder (Create model, routers folders, etc)
     5.12- Install CORS npm package  (npm i cors)
+    5.13- Create models and schemas
+    5.14- Install Bcrypt to hash passwords
+    5.15- Install jsonwebtoken
+    5.15- Install express-jwt
+    5.16- Install Multer to upload files like images
+    6.0- Installing monorepo Nx: npm install -g nx     (Nx 15 and lower use @nrwl/ instead of @nx/)
+    6.1- Create a workspace: npx create-nx-workspace@latest angular-monorepo --preset=angular-monorepo (Check out website)
+    6.2- Create a new project: npx nx g @nx/angular:app admin --directory=apps/admin (Inside a Nx workspace)
+    6.3- To run the project: nx serve ngshop/admin/etc
+    6.4- To show details about the project: nx show project admin --web
+    6.5- To list Nx capabilities npx nx list @nx/angular
+    7.1- To create a new components run: nx g @nx/angular:component home-page --directory=apps/ngshop/src/app/home-page
+    7.2- To create libraries nx g @nx/angular:library products --directory=libs/products (Check the Nx website)
+
+
+    Notes: This project was done using the Standalone option, but here are important details:
+        - tsconfig.base.json file contains useful paths like:
+             "paths": {
+                  "@blueprint/orders": ["libs/orders/src/index.ts"],
+                  "@blueprint/products": ["libs/products/src/index.ts"],
+                  "@blueprint/ui": ["libs/ui/src/index.ts"],
+                  "@blueprint/users": ["libs/users/src/index.ts"]
+                }
+        - Every time you want to export a component, after adding it to the a module.ts file you add this module
+          to your index.ts file: export * from './lib/ui/ui.module.ts'; Then you can import it in your app.module.ts file
+        - On the other hand if you use the standalone option, in the index.ts file just exports the component
+          and do the same thing.
+        - Note that index.ts is used to export services, modules and components.
+        - It is a good practice to define the styles you want to share across the application using this hierarchical structure:
+            1- Shared/styles.css --> Here you can define all your shared styles
+                2- Import it into the project/styles.css file ---> This way you can have all those styles available throughout the project
+
+    You can check:
+
+     1- https://regex101.com/ to check regexp
+     2- jwt.io to decrypt tokens
+     3- https://app.diagrams.net/ to build awesome diagrams
+     4- In the eslintrc.json project file you can configure the prefix of components and directives
+        (Then you need to enable eslint in your IDE)
+     5- You can turn off some annoying rules in your eslint.json file
