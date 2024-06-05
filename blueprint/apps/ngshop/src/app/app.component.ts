@@ -5,7 +5,7 @@ import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {ProductListComponent} from "./pages/product-list/product-list.component";
 import {HeaderComponent} from "./shared/header/header.component";
 import {FooterComponent} from "./shared/footer/footer.component";
-import {BannerComponent} from "@blueprint/ui"; // imported from the index.ts file (check tsconfig.base.json)
+import {BannerComponent} from "@blueprint/ui";
 
 @Component({
   standalone: true,
@@ -16,7 +16,7 @@ import {BannerComponent} from "@blueprint/ui"; // imported from the index.ts fil
     ProductListComponent,
     HeaderComponent,
     FooterComponent,
-    BannerComponent
+    BannerComponent,
   ],
   selector: 'blueprint-root',
   templateUrl: './app.component.html',

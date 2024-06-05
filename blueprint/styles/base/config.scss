@@ -1,0 +1,13 @@
+body, .p-component {                           // This was added to avoid because .p-component is the entry point for thr fonts of primeNG, body is not enough
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  @include reset-list;
+}
+

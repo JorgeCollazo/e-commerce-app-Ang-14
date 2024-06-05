@@ -1,4 +1,28 @@
-.testing {
-  color: #F23
-}
+// Base
+@import "~normalize.css/normalize.css";             //  Normalizing all the styles by default
+@import "base/colors";
+@import "base/fonts";
+@import "base/mixins";
+
+//Third party Libs
+@import "primeicons/primeicons.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeflex/primeflex.css";
+
+// Pages
+
+
+// Shared
+@import "./apps/admin/shell.scss";
+
+//Libs/ui
+@import "./libs/ui/ui";
+@import "./libs/products/product";
+@import "./libs/orders/order";
+@import "./libs/users/users";
+
+
+
+@import "base/config";                                      // After third-party libraries, besides it calls a mixin inside mixins.scss
 

@@ -1,0 +1,49 @@
+<p-toast />
+<p-confirmDialog />
+<div class="admin-page">
+  <p-card header="Users" subheader="List of all users">
+    <div class="grid">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button icon="pi pi-plus" label="New" styleClass="mr-2" (onClick)="openUserDialog()"></p-button>
+            <!--         <button pButton icon="pi pi-print" class="mr-2 p-button-success"></button> ********** Another button way ********** -->
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
+              <th>Email</th>
+              <th>isAdmin</th>
+              <th>Country</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                @if(user.isAdmin) {
+                  <p-tag icon="pi pi-check" severity="success" [rounded]="true" />
+                } @else {
+                  <p-tag icon="pi pi-times" severity="danger" [rounded]="true" />
+                }
+              </td>
+              <td>{{ getCountryName(user.country) }}</td>
+              <td>
+                <p-button icon="pi pi-trash" styleClass="mr-2" severity="danger" [style]="{ 'height': '2rem', 'width': '2rem' }" (onClick)="deleteUser(user.id)"></p-button>
+                <p-button icon="pi pi-pencil" styleClass="p-button-success" [style]="{ 'height': '2rem', 'width': '2rem' }" (onClick)="editUser(user.id)"></p-button> <!--Just another way of applying css class-->
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>

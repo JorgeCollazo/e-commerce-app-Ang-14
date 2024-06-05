@@ -33,7 +33,15 @@
     6.5- To list Nx capabilities npx nx list @nx/angular
     7.1- To create a new components run: nx g @nx/angular:component home-page --directory=apps/ngshop/src/app/home-page
     7.2- To create libraries nx g @nx/angular:library products --directory=libs/products (Check the Nx website)
-
+    7.3- If you were to create a service: nx g @nx/angular:service --name=services/categories --project=products --dry-run (Standing on blueprint folder)
+    8.0- Install PrimeNG from npm
+        - npm install primeng
+        - npm install primeicons
+        - npm install primeflex
+    9.0- Remember to tweak the .eslintrc.json file
+    10- Install npm install --save normalize.css to normalize your css rules.
+    11- Grid system were use using Primeflex
+    12- Install npm i i18n-iso-countries for the - Countries Select -
 
     Notes: This project was done using the Standalone option, but here are important details:
         - tsconfig.base.json file contains useful paths like:
@@ -50,7 +58,7 @@
         - Note that index.ts is used to export services, modules and components.
         - It is a good practice to define the styles you want to share across the application using this hierarchical structure:
             1- Shared/styles.css --> Here you can define all your shared styles
-                2- Import it into the project/styles.css file ---> This way you can have all those styles available throughout the project
+            2- Import it into the project/styles.css file ---> This way you can have all those styles available throughout the project
 
     You can check:
 
@@ -60,3 +68,50 @@
      4- In the eslintrc.json project file you can configure the prefix of components and directives
         (Then you need to enable eslint in your IDE)
      5- You can turn off some annoying rules in your eslint.json file
+
+    Note: Angular 17 and above encourages you to use components as standalone, not in modules, when you need to use
+          service you should add the following to the Providers array in your app.config.ts file:
+          provideHttpClient(withFetch())
+
+    Note: Angular 17 changes its control flow syntax to get it working you must add this to your AngularCompilerOptions in
+          your tsconfig.ts file:
+
+          "_enabledBlockTypes": [
+                "if","for","switch","defer"
+          ]
+
+    Note: Whenever you see the error message:
+
+        ERROR NullInjectorError: R3InjectorError(Standalone[CategoriesDialogComponent])[MessageService -> MessageService -> MessageService -> MessageService -> MessageService]:
+        NullInjectorError: No provider for MessageService!
+
+    It means that you need to include the service in your providers array
+
+    Note: To solve BrowserModuleAnimation import just add this to the providers array in main.ts:
+
+        importProvidersFrom([BrowserAnimationsModule]) OR provideAnimations()
+
+    The importProvidersFrom function provides a bridge back to the NgModule world. It should not be used in component provide as it is only usable in an application injector
+    Angular new versions provide two new function provideAnimations() and provideNoopAnimations() to enable and disable animation. we could use it like this.
+
+    import { provideAnimations } from '@angular/platform-browser/animations';
+
+    bootstrapApplication(AppComponent, {
+        providers: [
+          provideAnimations()
+        ]
+     })
+
+    Note: To create environment variables check the project.json (Angular.json before). More on this in:
+          https://nx.dev/recipes/angular/use-environment-variables-in-angular
+          https://medium.com/@hongtatyew/about-environment-ts-in-your-angular-applications-50646ab08c81
+          https://alifrazansaputra.medium.com/working-with-environments-the-stages-of-development-angular-17-54f104990025
+
+          In previous versions it was done using environment.ts and environment.prod.ts files
+
+    Note: To install Quill (For editor) check the project.json and the imports
+
+    ******************************************* Pending *****************************************
+
+    1- ESLint
+    2- Environment variables

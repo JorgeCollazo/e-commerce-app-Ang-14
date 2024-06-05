@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
     if(!user) {
         return res.status(500).json({
             success:false,
-            message: 'The user with the given ID was not found'
+            message: 'The user.ts with the given ID was not found'
         })
     }
     res.status(200).send(user);
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {       // Moved to routes folder
     newUser = await newUser.save();         // Async/Await way
 
     if(!newUser)
-        return res.status(400).send('The user cannot be created!')
+        return res.status(400).send('The user.ts cannot be created!')
     res.status(200).send(newUser);
     // newUser.save()                                   // Try/Catch way
     //     .then((createdUser) => {                     // User created after saving
@@ -101,19 +101,19 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', (req, res) => {
     if(!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(404).send('No user ID found!!')
+        return res.status(404).send('No user.ts ID found!!')
     }
 
     User.findByIdAndDelete(req.params.id).then((user) =>{
         if(user){
             return res.status(200).json({
                 success: true,
-                message: 'The user was removed'
+                message: 'The user.ts was removed'
             })
         } else {
             return res.status(404).json({
                 success: false,
-                message: 'The user was not removed'
+                message: 'The user.ts was not removed'
             })
         }
     }).catch((err) =>{
@@ -128,7 +128,7 @@ router.post('/login', async (req, res) => {
     const secret = process.env.secret;
 
     if(!user) {
-        return res.status(404).send('The user does not exist');
+        return res.status(404).send('The user.ts does not exist');
     }
     if (user && bcrypt.compareSync(req.body.password.toString(), user.passwordHash)) {
 

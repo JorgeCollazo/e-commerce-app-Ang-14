@@ -91,7 +91,7 @@ router.post('/', uploadOptions.single('image'), async(req, res) => {       // Mo
         return res.status(404).send('No image in the request!!')
     }
     const fileName = req.file.filename;
-    const basePath = `${req.protocol}://${req.get('host')}/public/upload/`;
+    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
     const newProduct = new Product({
         name: req.body.name,
         description: req.body.description,

@@ -1,0 +1,97 @@
+<p-toast />
+<div class="admin-page">
+  <p-card [header]="editMode ? 'Edit User' : 'Add User'" subheader="You can add or edit users here">
+    <div class="grid mb-5">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-right"></div>
+          <div class="p-toolbar-group-left">
+            <p-button icon="pi pi-plus" class="mr-2" [label]="editMode ? 'Edit' : 'Create'" (click)="onSubmit()" ></p-button>
+            <p-button icon="pi pi-times-circle" severity="danger" label="Cancel" (click)="goBack()"></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <form [formGroup]="form">
+          <div class="formgrid grid">
+            <div class="field col-4">
+              <label for="name">Name</label>
+              <input id="name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="name">
+              @if(userForm['name'].invalid && isSubmitted) {
+                <small class="p-error">Name is required</small>
+              }
+            </div>
+            <div class="field col-4">
+              <label for="email">Email</label>
+              <input id="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="email">
+
+              @if(userForm['email'].errors?.['email'] && isSubmitted) {
+              <small class="p-error">Email is wrong</small>
+              }
+
+              @else if(userForm['email'].invalid && isSubmitted) {
+                <small class="p-error">Email is required</small>
+              }
+
+            </div>
+            <div class="field col-4">
+              <label for="password">Password</label>
+              <input id="password" type="password" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="password">
+              @if(userForm['password'].invalid && isSubmitted) {
+              <small class="p-error">Password is required</small>
+              }
+            </div>
+            <div class="field col-4">
+              <label for="phone">Phone</label> <br/>
+              <p-inputMask
+                mask="(999) 999-9999"
+                [style]="{'width':'100%'}"
+                formControlName="phone"
+                placeholder="(999) 999-9999" />
+                @if(userForm['phone'].invalid && isSubmitted) {
+                <small class="p-error">Phone is required</small>
+                }
+            </div>
+            <div class="field col-4">
+              <label for="street">Street</label>
+              <input id="street" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="street">
+            </div>
+            <div class="field col-4">
+              <label for="country">Country</label> <br />
+              <p-dropdown
+                [options]="countries"
+                formControlName="country"
+                placeholder="Select a country"
+                optionLabel="name"
+                optionValue="id"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+              />
+            </div>
+          </div>
+          <div class="formgrid grid">
+            <div class="field col-4">
+              <label for="apartment">Apartment</label>
+              <input id="apartment" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="apartment">
+            </div>
+            <div class="field col-4">
+              <label for="zip">Zip code</label>
+              <input id="zip" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="zip">
+            </div>
+            <div class="field col-4">
+              <label for="city">City</label>
+              <input id="city" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" pInputText formControlName="city">
+            </div>
+            <div class="field col-4">
+              <label for="isAdmin">Is Admin</label> <br />
+              <p-inputSwitch formControlName="isAdmin" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

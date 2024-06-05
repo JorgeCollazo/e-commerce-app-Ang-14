@@ -7,21 +7,22 @@ function authJwt() {
         secret,
         algorithms: ['HS256'],       // Algorithms to be used, check the jwt.io website
         isRevoked: isRevoked
-    }).unless({              // All these routes don't need token (The user doesnt have to be authenticated to see them)'
+    }).unless({              // All these routes don't need token (The user.ts doesnt have to be authenticated to see them)'
         path: [
             // { url: `${api}/products`, methods: ['GET', 'OPTIONS'] },
-            { url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },   // Using a regexp to accept multiple endpoints you can check regexp here https://regex101.com/
-            { url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },   // Using a regexp to accept multiple endpoints you can check regexp here https://regex101.com/
-            { url: /\/api\/v1\/categories(.*)/, methods: ['GET', 'OPTIONS'] },   // Using a regexp to accept multiple endpoints you can check regexp here https://regex101.com/
-            `${api}/users/login`,
-            `${api}/users/register`,
-            `${api}/users/get/count`,
+            // { url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },   // Using a regexp to accept multiple endpoints you can check regexp here https://regex101.com/
+            // { url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },   // Using a regexp to accept multiple endpoints you can check regexp here https://regex101.com/
+            // { url: /\/api\/v1\/categories(.*)/, methods: ['GET', 'OPTIONS'] },   // Using a regexp to accept multiple endpoints you can check regexp here https://regex101.com/
+            // `${api}/users/login`,
+            // `${api}/users/register`,
+            // `${api}/users/get/count`,
+            { url: /(.*)/ }                           // To allow all authorization urls in the meanwhile
         ]
     })
 }
 
-async function isRevoked(req, token, done) {          // payload is the data inside the user
-    return !token.payload.isAdmin;                  // If the user is not Admin the request is revoked
+async function isRevoked(req, token, done) {          // payload is the data inside the user.ts
+    return !token.payload.isAdmin;                  // If the user.ts is not Admin the request is revoked
 }
 
 module.exports = authJwt;

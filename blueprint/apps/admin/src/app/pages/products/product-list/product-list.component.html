@@ -1,0 +1,47 @@
+<p-toast />
+<p-confirmDialog />
+<div class="admin-page">
+  <p-card header="Products" subheader="List of all products">
+    <div class="grid">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button icon="pi pi-plus" label="New" styleClass="mr-2" (onClick)="openProductDialog()"></p-button>
+            <!--         <button pButton icon="pi pi-print" class="mr-2 p-button-success"></button> ********** Another button way ********** -->
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <p-table [value]="products" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
+              <th>Image</th>
+              <th pSortableColumn="price">Price <p-sortIcon field="price" /></th>
+              <th pSortableColumn="stock">Stock <p-sortIcon field="stock" /></th>
+              <th pSortableColumn="category">Category <p-sortIcon field="category" /></th>
+              <th pSortableColumn="category">Created at <p-sortIcon field="created_at" /></th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{ product.name }}</td>
+              <td><img [src]=product.image alt="" width="100" height="100"/></td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.countInStock }}</td>
+              <td>{{ product.category.name }}</td>
+              <td>{{ product.dateCreated | date: 'short' }}</td>
+              <td>
+                <p-button icon="pi pi-trash" styleClass="mr-1" severity="danger" [style]="{ 'height': '1.5rem', 'width': '1.5rem' }" (onClick)="deleteProduct(product.id)"></p-button>
+                <p-button icon="pi pi-pencil" styleClass="p-button-success" [style]="{ 'height': '1.5rem', 'width': '1.5rem' }" (onClick)="editProduct(product.id)"></p-button> <!--Just another way of applying css class-->
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
